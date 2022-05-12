@@ -7,3 +7,10 @@
   margin: 0;
   padding: 0;
 }
+
+@media (max-width: 1279px) {
+  .elements__list {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 1fr);
+  }
+}
