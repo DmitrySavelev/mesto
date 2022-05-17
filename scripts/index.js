@@ -17,31 +17,56 @@ popup.addEventListener('click', function (event) {
 
 
 
-const formElement = document.querySelector('.popup__form');
-const nameInput = formElement.querySelector('.popup__name__input');
-const jobInput = formElement.querySelector('.popup__job__input');
+// const formElement = document.querySelector('.popup__form');
+// const nameInput = formElement.querySelector('.popup__name__input');
+// const jobInput = formElement.querySelector('.popup__job__input');
 
-function formSubmitHandler (evt) {
-    evt.preventDefault();
-    let getName = nameInput.getAttribute('value');
-    let getJob = jobInput.getAttribute('value');
-    let insertName = document.querySelector('.profile__name');
-    let insertJob = document.querySelector('.profile__job');
-    getName.textContent = 'new text';
-    getJob.textContent = 'new text';
+// let getName = nameInput.getAttribute('value');
+// let getJob = jobInput.getAttribute('value');
 
-    // Получите значение полей jobInput и nameInput из свойства value
+// let insertName = document.querySelector('.profile__name');
+// let insertJob = document.querySelector('.profile__job');
 
-    // Выберите элементы, куда должны быть вставлены значения полей
+// getName.textContent = 'new text';
+// getJob.textContent = 'new text';
 
-    // Вставьте новые значения с помощью textContent
-}
+
+
+// function formSubmitHandler(evt) {
+//   evt.preventDefault();
+//   let getName = nameInput.getAttribute('value');
+//   let getJob = jobInput.getAttribute('value');
+//   let insertName = document.querySelector('.profile__name');
+//   let insertJob = document.querySelector('.profile__job');
+//   getName.textContent = 'new text';
+//   getJob.textContent = 'new text';
+
+//   // Получите значение полей jobInput и nameInput из свойства value
+
+//   // Выберите элементы, куда должны быть вставлены значения полей
+
+//   // Вставьте новые значения с помощью textContent
+// }
 
 
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
 
+// formElement.addEventListener('submit', formSubmitHandler);
+
+
+
+const formElement = document.querySelector('.popup__form');
+const nameInput = document.querySelector('.popup__name__input');
+const jobInput = document.querySelector('.popup__job__input');
+console.log(document.querySelector('.profile__name'));
+
+document.querySelector('.popup__button').onclick = function (e) {
+  e.preventDefault();
+  document.querySelector('.profile__name').textContent = nameInput.value;
+  document.querySelector('.profile__job').textContent = jobInput.value;
+  togglePopup();
+}
 
 
