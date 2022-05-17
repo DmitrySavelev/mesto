@@ -31,32 +31,48 @@
 
       <section class="elements">
         <ul class="elements__list">
+
           <li>
             <img src="images/elements/Карачаевск.png" alt="" class="elements__item">
-            <p class="elements__title">Карачаевск<img src="images/elements__like.svg" alt="" class="elements__like"></p>
+            <div class="elements__text-content">
+              <p class="elements__title">Карачаевск</p>
+              <img src="images/elements__like.svg" alt="" class="elements__like">
+            </div>
           </li>
           <li>
             <img src="images/elements/Гора Эльбрус.png" alt="" class="elements__item">
-            <p class="elements__title">Гора Эльбрус<img src="images/elements__like.svg" alt="" class="elements__like">
-            </p>
+            <div class="elements__text-content">
+              <p class="elements__title">Гора Эльбрус</p>
+              <img src="images/elements__like.svg" alt="" class="elements__like">
+            </div>
           </li>
           <li>
             <img src="images/elements/Домбай.png" alt="" class="elements__item">
-            <p class="elements__title">Домбай<img src="images/elements__like.svg" alt="" class="elements__like"></p>
+            <div class="elements__text-content">
+              <p class="elements__title">Домбай</p>
+              <img src="images/elements__like.svg" alt="" class="elements__like">
+            </div>
           </li>
           <li>
             <img src="images/elements/Гора Эльбрус.png" alt="" class="elements__item">
-            <p class="elements__title">Гора Эльбрус<img src="images/elements__like.svg" alt="" class="elements__like">
-            </p>
+            <div class="elements__text-content">
+              <p class="elements__title">Гора Эльбрус</p>
+              <img src="images/elements__like.svg" alt="" class="elements__like">
+            </div>
           </li>
           <li>
             <img src="images/elements/Домбай.png" alt="" class="elements__item">
-            <p class="elements__title">Домбай<img src="images/elements__like.svg" alt="" class="elements__like"></p>
+            <div class="elements__text-content">
+              <p class="elements__title">Домбай</p>
+              <img src="images/elements__like.svg" alt="" class="elements__like">
+            </div>
           </li>
           <li>
             <img src="images/elements/Карачаевск.png" alt="" class="elements__item">
-            <p class="elements__title">Карачаево-Ч...<img src="images/elements__like.svg" alt="" class="elements__like">
-            </p>
+            <div class="elements__text-content">
+              <p class="elements__title">Карачаево-Черкессия</p>
+              <img src="images/elements__like.svg" alt="" class="elements__like">
+            </div>
           </li>
         </ul>
       </section>
@@ -67,7 +83,20 @@
       <p class="footer__copyright">© 2022 Mesto Russia</p>
     </footer>
 
+    <section class="popup">
+      <div class="popup__container">
+        <img src="images/popup__icon.svg" alt="кнопка закрыть" class="popup__icon">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form">
+          <input type="text" class="popup__input popup__name__input" value="Жак-Ив Кусто">
+          <input type="text" class="popup__input popup__job__input" value="Исследователь океана">
+          <button type="submit" class="popup__button">Сохранить</button>
+        </form>
+      </div>
+    </section>
+
   </div>
+  <script src="scripts/index.js"></script>
 </body>
 
 </html>

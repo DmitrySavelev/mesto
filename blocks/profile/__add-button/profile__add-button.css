@@ -8,6 +8,11 @@
   background-repeat: no-repeat;
 }
 
+.profile__add-button:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
 @media (max-width: 1279px) {
   .profile__add-button {
     width: 282px;
