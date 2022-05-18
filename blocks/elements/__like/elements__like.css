@@ -1,7 +1,10 @@
 .elements__like {
-  width: 22px;
+  width: 27px;
   height: 19px;
   background-image: url(../../../images/elements__like.svg);
+  background-repeat: no-repeat;
+  border: none;
+  background-color: #fff;
 }
 
 .elements__like:hover {

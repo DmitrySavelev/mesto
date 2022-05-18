@@ -24,29 +24,28 @@
           <div class="profile__info">
             <div class="profile__paragraph-btn">
               <p class="profile__name">Жак-Ив Кусто</p>
-              <button class="profile__edit-button"></button>
+              <button type="button" class="profile__edit-button"></button>
             </div>
             <p class="profile__job">Исследователь океана</p>
           </div>
         </div>
-        <button class="profile__add-button"></button>
+        <button type="button" class="profile__add-button"></button>
       </section>
 
       <section class="elements">
-        <ul class="elements__list">
-
+        <ul class="elements__card">
           <li>
             <img src="images/elements/Карачаевск.png" alt="старая полуразрушенная церковь" class="elements__item">
             <div class="elements__text-content">
               <p class="elements__title">Карачаевск</p>
-              <img src="images/elements__like.svg" alt="лайк" class="elements__like">
+              <button type="button" class="elements__like"></button>
             </div>
           </li>
           <li>
             <img src="images/elements/Гора_Эльбрус.png" alt="Гора Эльбрус" class="elements__item">
             <div class="elements__text-content">
               <p class="elements__title">Гора Эльбрус</p>
-              <img src="images/elements__like.svg" alt="лайк" class="elements__like">
+              <button type="button" class="elements__like"></button>
             </div>
           </li>
           <li>
@@ -54,14 +53,14 @@
               class="elements__item">
             <div class="elements__text-content">
               <p class="elements__title">Домбай</p>
-              <img src="images/elements__like.svg" alt="лайк" class="elements__like">
+              <button type="button" class="elements__like"></button>
             </div>
           </li>
           <li>
             <img src="images/elements/Гора_Эльбрус.png" alt="Гора Эльбрус" class="elements__item">
             <div class="elements__text-content">
               <p class="elements__title">Гора Эльбрус</p>
-              <img src="images/elements__like.svg" alt="лайк" class="elements__like">
+              <button type="button" class="elements__like"></button>
             </div>
           </li>
           <li>
@@ -69,14 +68,14 @@
               class="elements__item">
             <div class="elements__text-content">
               <p class="elements__title">Домбай</p>
-              <img src="images/elements__like.svg" alt="лайк" class="elements__like">
+              <button type="button" class="elements__like"></button>
             </div>
           </li>
           <li>
             <img src="images/elements/Карачаевск.png" alt="старая полуразрушенная церковь" class="elements__item">
             <div class="elements__text-content">
               <p class="elements__title">Карачаево-Черкессия</p>
-              <img src="images/elements__like.svg" alt="лайк" class="elements__like">
+              <button type="button" class="elements__like"></button>
             </div>
           </li>
         </ul>
@@ -90,11 +89,11 @@
 
     <section class="popup">
       <div class="popup__container">
-        <img src="images/popup__icon.svg" alt="кнопка закрыть" class="popup__icon">
+        <button type="button" class="popup__icon"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form">
-          <input type="text" class="popup__input popup__name-input" value="Жак-Ив Кусто">
-          <input type="text" class="popup__input popup__job-input" value="Исследователь океана">
+        <form method="get" name="popupForm" class="popup__form">
+          <input name="inputName" type="text" class="popup__input popup__name-input" value="Жак-Ив Кусто">
+          <input name="inputJob" type="text" class="popup__input popup__job-input" value="Исследователь океана">
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
       </div>
