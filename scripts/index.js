@@ -17,8 +17,8 @@ popup.addEventListener('click', function (event) {
 // Редактирование имени и информации о себе
 
 const formElement = document.querySelector('.popup__form');
-const nameInput = document.querySelector('.popup__name_input');
-const jobInput = document.querySelector('.popup__job_input');
+const nameInput = document.querySelector('.popup__name-input');
+const jobInput = document.querySelector('.popup__job-input');
 
 document.querySelector('.popup__button').onclick = function (e) {
   e.preventDefault();
