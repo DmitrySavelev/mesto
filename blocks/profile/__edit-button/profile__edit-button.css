@@ -6,7 +6,7 @@
   background-position: center;
   border: 1px solid #fff;
   background-color: #000;
-  margin-left: 18px;
+  /* margin-left: 18px; */
 }
 
 .profile__edit-button:hover {
@@ -18,7 +18,7 @@
   .profile__edit-button {
     width: 18px;
     height: 18px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     background-size: 7.5px 7.5px;
   }
 }

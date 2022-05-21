@@ -6,6 +6,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 505px;
 }
 
 @media (max-width: 1279px) {
@@ -13,5 +14,6 @@
     font-size: 27px;
     font-weight: 500;
     line-height: 33px;
+    max-width: 222px;
   }
 }
