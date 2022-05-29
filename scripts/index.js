@@ -12,7 +12,7 @@ function togglePopup() {
   if (popup.classList.contains('popup_opened')) {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
-}
+  }
 }
 
 editButton.addEventListener('click', togglePopup);
