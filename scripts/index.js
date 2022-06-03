@@ -25,3 +25,54 @@ function formSubmitHandler(e) {
 editButton.addEventListener('click', togglePopup);
 closeButton.addEventListener('click', togglePopup);
 formElement.addEventListener('submit', formSubmitHandler);
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+function renderList(data) {
+  data.forEach(item => renderItem(item))
+}
+
+function renderItem(card) {
+  const listElement = cloneTemplate(document.querySelector('.'))
+}
+
+renderList(initialCards);
+
+// function renderItem(text) {
+//   const listElement = cloneTemplate(document.querySelector('.todo-template'));
+//   const textElement = listElement.querySelector('.todo__text');
+//   textElement.textContent = text;
+//   addEventListeners(listElement);
+//   todosListElement.append(listElement);
+// }
+
+// function cloneTemplate(container) {
+//   const templateElement = container.content;
+//   const newElement = templateElement.cloneNode(true);
+//   return newElement;
+// }
