@@ -7,6 +7,8 @@ const jobInput = document.querySelector('.popup__job-input');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
+const container = document.querySelector('.elements__card');
+
 function togglePopup() {
   popup.classList.toggle('popup_opened');
   if (popup.classList.contains('popup_opened')) {
@@ -54,11 +56,24 @@ const initialCards = [
 ];
 
 function renderList(data) {
-  data.forEach(item => renderItem(item))
+  data.forEach(function(item) {
+    renderItem(item);
+  })
+};
+
+function renderItem(element) {
+  const listElement = cloneTemplate(document.querySelector('#template'));
+  const titleElement = listElement.querySelector('.elements__title');
+  titleElement.textContent = element.name;
+  const elementItem = listElement.querySelector('.elements__item');
+  elementItem.src = element.link;
+  container.append(listElement);
 }
 
-function renderItem(card) {
-  const listElement = cloneTemplate(document.querySelector('.'))
+function cloneTemplate(container) {
+  const templateElement = container.content;
+  const newElement = templateElement.cloneNode(true);
+  return newElement;
 }
 
 renderList(initialCards);
