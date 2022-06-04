@@ -28,6 +28,13 @@ editButton.addEventListener('click', togglePopup);
 closeButton.addEventListener('click', togglePopup);
 formElement.addEventListener('submit', formSubmitHandler);
 
+
+
+
+
+
+
+
 const initialCards = [
   {
     name: 'Архыз',
