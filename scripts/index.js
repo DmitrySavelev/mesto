@@ -7,28 +7,37 @@ const jobInput = document.querySelector('.popup__job-input');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
-const container = document.querySelector('.elements__card');
+const container = document.querySelector('.elements__card');//контейнер для вставки из template
+const addButton = document.querySelector('.profile__add-button');
+const popupNewPlace = document.querySelector('.popup_new_place');
+const closeButtonPlace = document.querySelector('.close');
 
-function togglePopup() {
-  popup.classList.toggle('popup_opened');
-  if (popup.classList.contains('popup_opened')) {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
+function togglePopup() {//функция включения и отключения класса для отображения попапа
+  popup.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
+  if (popup.classList.contains('popup_opened')) {//если в попапе есть класс то...
+    nameInput.value = profileName.textContent;//значение со страницы вставляется в инпут
+    jobInput.value = profileJob.textContent;//значение из инпута в попапе вставляется на страницу
   }
 }
 
-function formSubmitHandler(e) {
-  e.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  togglePopup();
+function togglePopupPlace() {//функция включения и отключения класса для отображения попапа
+  popupNewPlace.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
+}
+
+function formSubmitHandler(e) {//функция для отправки форм
+  e.preventDefault();//отмена действия браузера (в данном случае перезагрузки страницы)
+  profileName.textContent = nameInput.value;//на страницу переносится значение из инпута в попапе
+  profileJob.textContent = jobInput.value;//на страницу переносится значение из инпута в попапе
+  togglePopup();//функция включения и отключения класса для отображения попапа
+  // popupNewPlace();
 }
 
 editButton.addEventListener('click', togglePopup);
 closeButton.addEventListener('click', togglePopup);
 formElement.addEventListener('submit', formSubmitHandler);
 
-
+addButton.addEventListener('click', togglePopupPlace);
+closeButtonPlace.addEventListener('click', togglePopupPlace);
 
 
 
