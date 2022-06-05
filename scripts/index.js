@@ -11,6 +11,10 @@ const container = document.querySelector('.elements__card');//контейнер
 const addButton = document.querySelector('.profile__add-button');
 const popupNewPlace = document.querySelector('.popup_new_place');
 const closeButtonPlace = document.querySelector('.close');
+const popupFormPlace = document.querySelector('.popup__form_place');
+const nameInputPlace = document.querySelector('.popup__name-input-place');
+const jobInputPlace = document.querySelector('.popup__job-input-place');
+
 
 function togglePopup() {//функция включения и отключения класса для отображения попапа
   popup.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
@@ -20,16 +24,24 @@ function togglePopup() {//функция включения и отключен�
   }
 }
 
-function togglePopupPlace() {//функция включения и отключения класса для отображения попапа
-  popupNewPlace.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
-}
-
 function formSubmitHandler(e) {//функция для отправки форм
   e.preventDefault();//отмена действия браузера (в данном случае перезагрузки страницы)
   profileName.textContent = nameInput.value;//на страницу переносится значение из инпута в попапе
   profileJob.textContent = jobInput.value;//на страницу переносится значение из инпута в попапе
   togglePopup();//функция включения и отключения класса для отображения попапа
-  // popupNewPlace();
+}
+
+function togglePopupPlace() {//функция включения и отключения класса для отображения попапа
+  popupNewPlace.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
+}
+
+function addCard(e) {//функция для добавления новой карточки
+  e.preventDefault();
+  let obj = {name:nameInputPlace.value, link:jobInputPlace.value};
+  initialCards.unshift(obj);
+  // container.prepend(obj);
+  renderItem(obj);
+  togglePopupPlace();
 }
 
 editButton.addEventListener('click', togglePopup);
@@ -38,8 +50,7 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 addButton.addEventListener('click', togglePopupPlace);
 closeButtonPlace.addEventListener('click', togglePopupPlace);
-
-
+popupFormPlace.addEventListener('submit', addCard);
 
 
 
@@ -71,19 +82,24 @@ const initialCards = [
   }
 ];
 
-function renderList(data) {
-  data.forEach(function(item) {
-    renderItem(item);
+function renderList(data) {//функция для добавления карточек из массива на страницу
+  data.forEach(function(item) {//перебор заданного массива
+    renderItem(item);//вызов функции для заполнения контейнера содержимым из template
   })
 };
 
-function renderItem(element) {
-  const listElement = cloneTemplate(document.querySelector('#template'));
-  const titleElement = listElement.querySelector('.elements__title');
-  titleElement.textContent = element.name;
-  const elementItem = listElement.querySelector('.elements__item');
-  elementItem.src = element.link;
-  container.append(listElement);
+function renderItem(element) {//функция для заполнения контейнера содержимым из template
+  const listElement = cloneTemplate(document.querySelector('#template'));//клонирование шаблона
+  const titleElement = listElement.querySelector('.elements__title');//элемент содержащий заголовок
+  titleElement.textContent = element.name;//берем из массива элемент с ключом name
+  const elementItem = listElement.querySelector('.elements__item');//элемент содержащий ссылку на картинку
+  elementItem.src = element.link;//берем из массива элемент с ключом link
+  container.prepend(listElement);//добавляем в конец контейнера получившийся склонированный блок
+  // if (listElement == false) {
+  //   container.prepend(listElement);//добавляем в конец контейнера получившийся склонированный блок
+  // } else {
+  //   container.append(listElement);//добавляем в конец контейнера получившийся склонированный блок
+  // }
 }
 
 function cloneTemplate(container) {
@@ -92,18 +108,25 @@ function cloneTemplate(container) {
   return newElement;
 }
 
-renderList(initialCards);
+renderList(initialCards.reverse());//вызов функции с изначальным массивом
 
-// function renderItem(text) {
-//   const listElement = cloneTemplate(document.querySelector('.todo-template'));
-//   const textElement = listElement.querySelector('.todo__text');
-//   textElement.textContent = text;
-//   addEventListeners(listElement);
-//   todosListElement.append(listElement);
-// }
 
-// function cloneTemplate(container) {
-//   const templateElement = container.content;
-//   const newElement = templateElement.cloneNode(true);
-//   return newElement;
+
+
+
+
+
+
+// function createCard(e) {\\может пригодится
+//   e.preventDefault();
+//   let arr = [];
+//   arr.push({
+//     name: `${nameInputPlace.value}`,
+//     link: `${jobInputPlace.value}`
+//   });
+//   // let obj = {name:nameInputPlace.value, link:jobInputPlace.value};
+//   initialCards.concat(arr);
+//   // initialCards.unshift(obj);
+//   // container.prepend(obj);
+//   togglePopupPlace();
 // }
