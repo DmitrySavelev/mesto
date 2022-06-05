@@ -38,7 +38,6 @@ function addCard(e) {//функция для добавления новой к�
   e.preventDefault();
   let obj = { name: nameInputPlace.value, link: jobInputPlace.value };
   initialCards.unshift(obj);
-  // container.prepend(obj);
   renderItem(obj);
   togglePopupPlace();
 }
@@ -50,9 +49,6 @@ formElement.addEventListener('submit', formSubmitHandler);
 addButton.addEventListener('click', togglePopupPlace);
 closeButtonPlace.addEventListener('click', togglePopupPlace);
 popupFormPlace.addEventListener('submit', addCard);
-
-
-
 
 const initialCards = [
   {
@@ -109,4 +105,4 @@ function LikeButtonClickHandler(e) {//функция для переключен
   likeButton.classList.toggle('elements__like_active');
 }
 
-addEventListener('click', LikeButtonClickHandler);
+container.addEventListener('click', LikeButtonClickHandler);
