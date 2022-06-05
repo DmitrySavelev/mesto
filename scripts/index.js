@@ -15,7 +15,6 @@ const popupFormPlace = document.querySelector('.popup__form_place');
 const nameInputPlace = document.querySelector('.popup__name-input-place');
 const jobInputPlace = document.querySelector('.popup__job-input-place');
 
-
 function togglePopup() {//функция включения и отключения класса для отображения попапа
   popup.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
   if (popup.classList.contains('popup_opened')) {//если в попапе есть класс то...
@@ -37,7 +36,7 @@ function togglePopupPlace() {//функция включения и отключ
 
 function addCard(e) {//функция для добавления новой карточки
   e.preventDefault();
-  let obj = {name:nameInputPlace.value, link:jobInputPlace.value};
+  let obj = { name: nameInputPlace.value, link: jobInputPlace.value };
   initialCards.unshift(obj);
   // container.prepend(obj);
   renderItem(obj);
@@ -83,7 +82,7 @@ const initialCards = [
 ];
 
 function renderList(data) {//функция для добавления карточек из массива на страницу
-  data.forEach(function(item) {//перебор заданного массива
+  data.forEach(function (item) {//перебор заданного массива
     renderItem(item);//вызов функции для заполнения контейнера содержимым из template
   })
 };
@@ -95,11 +94,6 @@ function renderItem(element) {//функция для заполнения ко�
   const elementItem = listElement.querySelector('.elements__item');//элемент содержащий ссылку на картинку
   elementItem.src = element.link;//берем из массива элемент с ключом link
   container.prepend(listElement);//добавляем в конец контейнера получившийся склонированный блок
-  // if (listElement == false) {
-  //   container.prepend(listElement);//добавляем в конец контейнера получившийся склонированный блок
-  // } else {
-  //   container.append(listElement);//добавляем в конец контейнера получившийся склонированный блок
-  // }
 }
 
 function cloneTemplate(container) {
@@ -110,23 +104,9 @@ function cloneTemplate(container) {
 
 renderList(initialCards.reverse());//вызов функции с изначальным массивом
 
+function LikeButtonClickHandler(e) {//функция для переключения класса для лайков
+  const likeButton = e.target;
+  likeButton.classList.toggle('elements__like_active');
+}
 
-
-
-
-
-
-
-// function createCard(e) {\\может пригодится
-//   e.preventDefault();
-//   let arr = [];
-//   arr.push({
-//     name: `${nameInputPlace.value}`,
-//     link: `${jobInputPlace.value}`
-//   });
-//   // let obj = {name:nameInputPlace.value, link:jobInputPlace.value};
-//   initialCards.concat(arr);
-//   // initialCards.unshift(obj);
-//   // container.prepend(obj);
-//   togglePopupPlace();
-// }
+addEventListener('click', LikeButtonClickHandler);
