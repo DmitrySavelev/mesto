@@ -2,8 +2,8 @@ const popup = document.querySelector('.popup');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__button-close');
 const formElement = document.querySelector('.popup__form');
-const nameInput = document.querySelector('.popup__name-input');
-const jobInput = document.querySelector('.popup__job-input');
+const inputName = document.querySelector('.popup__input-name');
+const inputJob = document.querySelector('.popup__input-job');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
@@ -23,14 +23,14 @@ function togglePopup() {//функция включения и отключен�
 
 function closePopup() {
   popup.classList.remove('popup_opened');//отключается класс для отображения попапа
-  nameInput.value = profileName.textContent;//значение со страницы вставляется в инпут
-  jobInput.value = profileJob.textContent;//значение со страницы вставляется в инпут
+  inputName.value = profileName.textContent;//значение со страницы вставляется в инпут
+  inputJob.value = profileJob.textContent;//значение со страницы вставляется в инпут
 }
 
 function formSubmitHandler(e) {//функция для отправки форм
   e.preventDefault();//отмена действия браузера (в данном случае перезагрузки страницы)
-  profileName.textContent = nameInput.value;//на страницу переносится значение из инпута в попапе
-  profileJob.textContent = jobInput.value;//на страницу переносится значение из инпута в попапе
+  profileName.textContent = inputName.value;//на страницу переносится значение из инпута в попапе
+  profileJob.textContent = inputJob.value;//на страницу переносится значение из инпута в попапе
   closePopup();//функция включения и отключения класса для отображения попапа
 }
 
