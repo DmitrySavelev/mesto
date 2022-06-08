@@ -38,15 +38,6 @@
         </ul>
       </section>
 
-      <div class="test">
-        <span class="span">test</span>
-        <button class="button" type="button">button</button>
-      </div>
-      <div class="ooo">
-        <span class="span">test</span>
-        <button class="button" type="button">button</button>
-      </div>
-
     </main>
 
     <footer class="footer">
@@ -72,7 +63,7 @@
         <form method="get" name="popupForm" class="popup__form popup__form_place">
           <input name="inputName" type="text" class="popup__input popup__name-input popup__name-input-place"
             value="Название">
-          <input name="inputJob" type="text" class="popup__input popup__job-input popup__job-input-place"
+          <input name="inputLink" type="text" class="popup__input popup__link-input popup__link-input-place"
             value="Ссылка на картинку">
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
@@ -80,11 +71,11 @@
     </section>
 
     <section class="popup popup_zoom-card">
-        <figure class="popup__figure">
-          <img src="https://svinki.org/wp-content/uploads/2016/08/Foto000292.jpg" alt="#" class="popup__image">
-          <figcaption class="popup__caption">ВАША ПОЛКА — ВЕРХНЯЯ</figcaption>
-          <button type="button" class="popup__button-close popup__button-close_image"></button>
-        </figure>
+      <figure class="popup__figure">
+        <button type="button" class="popup__button-close popup__button-close_image"></button>
+        <img src="#" alt="не выбрано изображение :(" class="popup__image">
+        <figcaption class="popup__caption"></figcaption>
+      </figure>
     </section>
 
   </div>
@@ -92,7 +83,7 @@
   <template id="template">
     <li class="elements__list">
       <div class="elements__wrapper">
-        <img class="elements__item">
+        <img class="elements__image">
         <button type="button" class="elements__trash"></button>
       </div>
       <div class="elements__text-content">

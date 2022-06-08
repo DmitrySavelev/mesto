@@ -13,23 +13,25 @@ const popupNewPlace = document.querySelector('.popup_new-place');
 const closeButtonPlace = document.querySelector('.popup__button-close_place');
 const popupFormPlace = document.querySelector('.popup__form_place');
 const nameInputPlace = document.querySelector('.popup__name-input-place');
-const jobInputPlace = document.querySelector('.popup__job-input-place');
-const popupImage = document.querySelector('.popup_zoom-card');
+const linkInputPlace = document.querySelector('.popup__link-input-place');
+const popupZoomCard = document.querySelector('.popup_zoom-card');
 const closeButtonImage = document.querySelector('.popup__button-close_image');
 
 function togglePopup() {//функция включения и отключения класса для отображения попапа
   popup.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
-  if (popup.classList.contains('popup_opened')) {//если в попапе есть класс то...
-    nameInput.value = profileName.textContent;//значение со страницы вставляется в инпут
-    jobInput.value = profileJob.textContent;//значение из инпута в попапе вставляется на страницу
-  }
+}
+
+function closePopup() {
+  popup.classList.remove('popup_opened');//отключается класс для отображения попапа
+  nameInput.value = profileName.textContent;//значение со страницы вставляется в инпут
+  jobInput.value = profileJob.textContent;//значение со страницы вставляется в инпут
 }
 
 function formSubmitHandler(e) {//функция для отправки форм
   e.preventDefault();//отмена действия браузера (в данном случае перезагрузки страницы)
   profileName.textContent = nameInput.value;//на страницу переносится значение из инпута в попапе
   profileJob.textContent = jobInput.value;//на страницу переносится значение из инпута в попапе
-  togglePopup();//функция включения и отключения класса для отображения попапа
+  closePopup();//функция включения и отключения класса для отображения попапа
 }
 
 function togglePopupPlace() {//функция включения и отключения класса для отображения попапа
@@ -38,19 +40,20 @@ function togglePopupPlace() {//функция включения и отключ
 
 function createCard(e) {//функция для добавления новой карточки
   e.preventDefault();
-  let obj = { name: nameInputPlace.value, link: jobInputPlace.value };
+  let obj = { name: nameInputPlace.value, link: linkInputPlace.value };
   initialCards.unshift(obj);
   renderItem(obj);
   togglePopupPlace();
+  nameInputPlace.value = 'Название';
+  linkInputPlace.value = 'Ссылка на картинку';
 }
 
 function togglePopupImage() {
-  popupImage.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
+  popupZoomCard.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
 }
 
-
 editButton.addEventListener('click', togglePopup);
-closeButton.addEventListener('click', togglePopup);
+closeButton.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler);
 
 addButton.addEventListener('click', togglePopupPlace);
@@ -58,7 +61,6 @@ closeButtonPlace.addEventListener('click', togglePopupPlace);
 popupFormPlace.addEventListener('submit', createCard);
 
 closeButtonImage.addEventListener('click', togglePopupImage);
-
 
 const initialCards = [
   {
@@ -98,8 +100,8 @@ function renderItem(element) {//функция для заполнения ко�
   const listElement = templateElement.cloneNode(true);//клонирование шаблона
   const titleElement = listElement.querySelector('.elements__title');//переменная содержащая заголовок
   titleElement.textContent = element.name;//берем из массива элемент с ключом name
-  const elementItem = listElement.querySelector('.elements__item');//переменная содержащая ссылку на картинку
-  elementItem.src = element.link;//берем из массива элемент с ключом link
+  const elementImage = listElement.querySelector('.elements__image');//переменная содержащая ссылку на картинку
+  elementImage.src = element.link;//берем из массива элемент с ключом link
 
   const likeButton = listElement.querySelector('.elements__like');//переменная содержащая кнопку лайк
   likeButton.addEventListener('click', function (e) {//функция для переключения состояния лайка
@@ -111,32 +113,21 @@ function renderItem(element) {//функция для заполнения ко�
     trash.closest('.elements__list').remove();
   });
 
-  const imageCard = listElement.querySelector('.elements__item');
+  const imageCard = listElement.querySelector('.elements__image');
   imageCard.addEventListener('click', function zoomImage() {
+    const popupImage = document.querySelector('.popup__image');
+    popupImage.src = imageCard.src;
+    const popupCaption = document.querySelector('.popup__caption');
+    popupCaption.textContent = titleElement.textContent;
     togglePopupImage();
   });
 
-  container.prepend(listElement);//добавляем в конец контейнера получившийся склонированный блок
+  if (initialCards.length < 7) {
+    container.append(listElement);
+  }
+  else {
+    container.prepend(listElement);
+  }
 }
 
-renderList(initialCards.reverse());//вызов функции с изначальным массивом
-
-
-
-
-
-
-
-// const button = document.querySelector('.button');
-// function deleteSpan() {
-//   button.closest('.test').remove();
-// }
-// button.addEventListener('click', deleteSpan);
-
-
-
-
-
-
-
-
+renderList(initialCards);//вызов функции с изначальным массивом
