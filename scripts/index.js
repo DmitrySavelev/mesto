@@ -1,66 +1,81 @@
-const popup = document.querySelector('.popup');
-const editButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__button-close');
-const formElement = document.querySelector('.popup__form');
+const profilePopup = document.querySelector('.popup_edit');
+const cardPopup = document.querySelector('.popup_card');
+const zoomPopup = document.querySelector('.popup_zoom');
+
+const profileEditButton = document.querySelector('.profile__edit-button');
+const buttonCloseEdit = document.querySelector('.popup__button-close_edit');
+const popupFormEdit = document.querySelector('.popup__form_edit');
+const popupFormPlace = document.querySelector('.popup__form_place');
 const inputName = document.querySelector('.popup__input_name');
 const inputJob = document.querySelector('.popup__input_job');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
+const templateElement = document.querySelector('#template').content;
 const container = document.querySelector('.elements__card');//контейнер для вставки из template
-const addButton = document.querySelector('.profile__add-button');
-const popupNewPlace = document.querySelector('.popup_new-place');
-const closeButtonPlace = document.querySelector('.popup__button-close_place');
-const popupFormPlace = document.querySelector('.popup__form_place');
+const buttonAdd = document.querySelector('.profile__add-button');
+const buttonClosePlace = document.querySelector('.popup__button-close_place');
 const nameInputPlace = document.querySelector('.popup__name-input-place');
 const linkInputPlace = document.querySelector('.popup__link-input-place');
-const popupZoomCard = document.querySelector('.popup_zoom-card');
-const closeButtonImage = document.querySelector('.popup__button-close_image');
+const buttonCloseImage = document.querySelector('.popup__button-close_image');
+const imagePopup = document.querySelector('.popup__image');
 
-function togglePopup() {//функция включения и отключения класса для отображения попапа
-  popup.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
+function openPopup(popup) {// функция открытия любого попапа
+  popup.classList.add('popup_opened');
+}
+function closePopup(popup) {//// функция закрытия любого попапа
+  popup.classList.remove('popup_opened');
 }
 
-function closePopup() {
-  popup.classList.remove('popup_opened');//отключается класс для отображения попапа
+function openPopupEdit() {
+  openPopup(profilePopup);
   inputName.value = profileName.textContent;//значение со страницы вставляется в инпут
   inputJob.value = profileJob.textContent;//значение со страницы вставляется в инпут
 }
+profileEditButton.addEventListener('click', openPopupEdit);
 
-function formSubmitHandler(e) {//функция для отправки форм
+function closePopupEdit() {
+  closePopup(profilePopup);
+}
+buttonCloseEdit.addEventListener('click', closePopupEdit);
+
+function handleFormSubmit(e) {//функция для отправки форм
   e.preventDefault();//отмена действия браузера (в данном случае перезагрузки страницы)
   profileName.textContent = inputName.value;//на страницу переносится значение из инпута в попапе
   profileJob.textContent = inputJob.value;//на страницу переносится значение из инпута в попапе
-  closePopup();//функция включения и отключения класса для отображения попапа
+  closePopup(profilePopup);//функция включения и отключения класса для отображения попапа
 }
+popupFormEdit.addEventListener('submit', handleFormSubmit);
 
-function togglePopupPlace() {//функция включения и отключения класса для отображения попапа
-  popupNewPlace.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
+function openPopupPlace() {//функция включения и отключения класса для отображения попапа
+  openPopup(cardPopup);
+  // cardPopup.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
 }
+buttonAdd.addEventListener('click', openPopupPlace);
+
+function closePopupPlace() {//функция включения и отключения класса для отображения попапа
+  closePopup(cardPopup);
+}
+buttonClosePlace.addEventListener('click', closePopupPlace);
 
 function createCard(e) {//функция для добавления новой карточки
   e.preventDefault();
-  let obj = { name: nameInputPlace.value, link: linkInputPlace.value };
-  initialCards.unshift(obj);
+  const obj = { name: nameInputPlace.value, link: linkInputPlace.value };
   renderItem(obj);
-  togglePopupPlace();
-  nameInputPlace.value = 'Название';
-  linkInputPlace.value = 'Ссылка на картинку';
+  closePopupPlace();
+  nameInputPlace.value = '';
+  linkInputPlace.value = '';
 }
-
-function togglePopupImage() {
-  popupZoomCard.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
-}
-
-editButton.addEventListener('click', togglePopup);
-closeButton.addEventListener('click', closePopup);
-formElement.addEventListener('submit', formSubmitHandler);
-
-addButton.addEventListener('click', togglePopupPlace);
-closeButtonPlace.addEventListener('click', togglePopupPlace);
 popupFormPlace.addEventListener('submit', createCard);
 
-closeButtonImage.addEventListener('click', togglePopupImage);
+function closePopupImage() {
+  closePopup(zoomPopup);
+}
+buttonCloseImage.addEventListener('click', closePopupImage);
+
+function openPopupImage() {
+  openPopup(zoomPopup);
+}
 
 const initialCards = [
   {
@@ -90,18 +105,18 @@ const initialCards = [
 ];
 
 function renderList(data) {//функция для добавления карточек из массива на страницу
-  data.forEach(function (item) {//перебор заданного массива
-    renderItem(item);//вызов функции для заполнения контейнера содержимым из template
+  data.forEach(function (item, needToPrepend) {//перебор заданного массива
+    renderItem(item, needToPrepend);//вызов функции для заполнения контейнера содержимым из template
   })
 };
 
-function renderItem(element) {//функция для заполнения контейнера содержимым из template
-  const templateElement = document.querySelector('#template').content;
+function renderItem(element, needToPrepend = false) {//функция для заполнения контейнера содержимым из template
   const listElement = templateElement.cloneNode(true);//клонирование шаблона
   const titleElement = listElement.querySelector('.elements__title');//переменная содержащая заголовок
   titleElement.textContent = element.name;//берем из массива элемент с ключом name
   const elementImage = listElement.querySelector('.elements__image');//переменная содержащая ссылку на картинку
   elementImage.src = element.link;//берем из массива элемент с ключом link
+  elementImage.alt = element.name;//присваиваем картинке из объекта альт с названием из объекта же
 
   const likeButton = listElement.querySelector('.elements__like');//переменная содержащая кнопку лайк
   likeButton.addEventListener('click', function (e) {//функция для переключения состояния лайка
@@ -115,18 +130,16 @@ function renderItem(element) {//функция для заполнения ко�
 
   const imageCard = listElement.querySelector('.elements__image');
   imageCard.addEventListener('click', function zoomImage() {
-    const popupImage = document.querySelector('.popup__image');
-    popupImage.src = imageCard.src;
+    imagePopup.src = element.link;
     const popupCaption = document.querySelector('.popup__caption');
     popupCaption.textContent = titleElement.textContent;
-    togglePopupImage();
+    openPopupImage();
   });
 
-  if (initialCards.length < 7) {
-    container.append(listElement);
-  }
-  else {
+  if (needToPrepend == false) {
     container.prepend(listElement);
+  } else {
+    container.append(listElement);
   }
 }
 
