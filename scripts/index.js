@@ -49,7 +49,6 @@ popupFormEdit.addEventListener('submit', handleFormSubmit);
 
 function openPopupPlace() {//функция включения и отключения класса для отображения попапа
   openPopup(cardPopup);
-  // cardPopup.classList.toggle('popup_opened');//включается или отключается класс для отображения попапа
 }
 buttonAdd.addEventListener('click', openPopupPlace);
 
@@ -57,16 +56,6 @@ function closePopupPlace() {//функция включения и отключ�
   closePopup(cardPopup);
 }
 buttonClosePlace.addEventListener('click', closePopupPlace);
-
-function createCard(e) {//функция для добавления новой карточки
-  e.preventDefault();
-  const obj = { name: nameInputPlace.value, link: linkInputPlace.value };
-  renderItem(obj);
-  closePopupPlace();
-  nameInputPlace.value = '';
-  linkInputPlace.value = '';
-}
-popupFormPlace.addEventListener('submit', createCard);
 
 function closePopupImage() {
   closePopup(zoomPopup);
@@ -104,13 +93,7 @@ const initialCards = [
   }
 ];
 
-function renderList(data) {//функция для добавления карточек из массива на страницу
-  data.forEach(function (item, needToPrepend) {//перебор заданного массива
-    renderItem(item, needToPrepend);//вызов функции для заполнения контейнера содержимым из template
-  })
-};
-
-function renderItem(element, needToPrepend = false) {//функция для заполнения контейнера содержимым из template
+function getItem(element) {//функция для заполнения контейнера содержимым из template
   const listElement = templateElement.cloneNode(true);//клонирование шаблона
   const titleElement = listElement.querySelector('.elements__title');//переменная содержащая заголовок
   titleElement.textContent = element.name;//берем из массива элемент с ключом name
@@ -118,6 +101,11 @@ function renderItem(element, needToPrepend = false) {//функция для з�
   elementImage.src = element.link;//берем из массива элемент с ключом link
   elementImage.alt = element.name;//присваиваем картинке из объекта альт с названием из объекта же
 
+  return listElement;
+}
+
+function setEventListeners(listElement, element) {
+  const titleElement = listElement.querySelector('.elements__title');//переменная содержащая заголовок
   const likeButton = listElement.querySelector('.elements__like');//переменная содержащая кнопку лайк
   likeButton.addEventListener('click', function (e) {//функция для переключения состояния лайка
     e.target.classList.toggle('elements__like_active');
@@ -135,12 +123,28 @@ function renderItem(element, needToPrepend = false) {//функция для з�
     popupCaption.textContent = titleElement.textContent;
     openPopupImage();
   });
+}
 
-  if (needToPrepend == false) {
+function renderCard(element, needToPrepend = false) {
+  const listElement = getItem(element);
+  setEventListeners(listElement, element);
+  if (needToPrepend) {
     container.prepend(listElement);
   } else {
     container.append(listElement);
   }
 }
 
-renderList(initialCards);//вызов функции с изначальным массивом
+function createCard(e) {//функция для добавления новой карточки
+  e.preventDefault();
+  const obj = { name: nameInputPlace.value, link: linkInputPlace.value };
+  renderCard(obj, true);
+  closePopupPlace();
+  nameInputPlace.value = '';
+  linkInputPlace.value = '';
+}
+popupFormPlace.addEventListener('submit', createCard);
+
+initialCards.forEach(function (element) {//перебор заданного массива
+  renderCard(element);//вызов функции для заполнения контейнера содержимым из template
+});
