@@ -101,11 +101,6 @@ function getItem(element) {//функция для заполнения конт
   elementImage.src = element.link;//берем из массива элемент с ключом link
   elementImage.alt = element.name;//присваиваем картинке из объекта альт с названием из объекта же
 
-  return listElement;
-}
-
-function setEventListeners(listElement, element) {
-  const titleElement = listElement.querySelector('.elements__title');//переменная содержащая заголовок
   const likeButton = listElement.querySelector('.elements__like');//переменная содержащая кнопку лайк
   likeButton.addEventListener('click', function (e) {//функция для переключения состояния лайка
     e.target.classList.toggle('elements__like_active');
@@ -123,11 +118,12 @@ function setEventListeners(listElement, element) {
     popupCaption.textContent = titleElement.textContent;
     openPopupImage();
   });
+
+  return listElement;
 }
 
 function renderCard(element, needToPrepend = false) {
   const listElement = getItem(element);
-  setEventListeners(listElement, element);
   if (needToPrepend) {
     container.prepend(listElement);
   } else {
