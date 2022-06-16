@@ -45,6 +45,7 @@ function handleFormSubmit(e) {//функция для отправки форм
   profileJob.textContent = inputJob.value;//на страницу переносится значение из инпута в попапе
   closePopup(profilePopup);//функция включения и отключения класса для отображения попапа
 }
+
 popupFormEdit.addEventListener('submit', handleFormSubmit);
 
 function openPopupPlace() {//функция включения и отключения класса для отображения попапа
@@ -144,3 +145,17 @@ popupFormPlace.addEventListener('submit', createCard);
 initialCards.forEach(function (element) {//перебор заданного массива
   renderCard(element);//вызов функции для заполнения контейнера содержимым из template
 });
+
+
+
+
+
+
+
+popupFormEdit.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+})
+
+inputName.addEventListener('submit', function (evt) {
+  console.log(evt.target.validity.valid);
+})
