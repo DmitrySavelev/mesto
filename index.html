@@ -49,10 +49,14 @@
         <button type="button" class="popup__button-close popup__button-close_edit"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form method="get" name="popupForm" class="popup__form popup__form_edit" novalidate>
-          <input name="inputName" type="text" class="popup__input popup__input_name" placeholder="Жак-Ив Кусто"
-            minlength="2" maxlength="40">
-          <input name="inputJob" type="text" class="popup__input popup__input_job" placeholder="Исследователь океана"
-            minlength="2" maxlength="200">
+          <label class="form__field">
+            <input name="inputName" type="text" id="name-input" class="popup__input popup__input_name"
+              placeholder="Жак-Ив Кусто" minlength="2" maxlength="40">
+            <span class="name-input-error popup__input_name-error"></span>
+            <input name="inputJob" type="text" id="job-input" class="popup__input popup__input_job"
+              placeholder="Исследователь океана" minlength="2" maxlength="200">
+            <span class="job-input-error popup__input_job-error"></span>
+          </label>
           <button type="submit" class="popup__button popup__button_invalid">Сохранить</button>
         </form>
       </div>
@@ -95,6 +99,7 @@
     </li>
   </template>
 
+  <script src="scripts/validate.js"></script>
   <script src="scripts/index.js"></script>
 </body>
 
