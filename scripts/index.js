@@ -150,10 +150,6 @@ initialCards.forEach(function (element) {//перебор заданного м�
 //Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6
 //Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6
 
-// const popupFormEdit = document.querySelector('.popup__form_edit');
-// const inputName = document.querySelector('.popup__input_name');
-// const inputJob = document.querySelector('.popup__input_job');
-
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add('form__input_type_error');
@@ -178,15 +174,17 @@ const isValid = (formElement, inputElement) => {
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
-      return !inputElement.validity.valid;
+    return !inputElement.validity.valid;
   })
 }
 
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add('form__submit_inactive');
+    buttonElement.classList.add('form__submit_inactive');
+    buttonElement.setAttribute('disabled', 'true');
   } else {
-      buttonElement.classList.remove('form__submit_inactive');
+    buttonElement.classList.remove('form__submit_inactive');
+    buttonElement.removeAttribute('disabled');
   }
 }
 
@@ -213,3 +211,76 @@ const enableValidation = () => {
 };
 
 enableValidation();
+
+
+
+
+
+
+
+
+
+
+
+profilePopup.addEventListener('click', function (event) {
+  if (event.target === event.currentTarget) {closePopupEdit()}
+});
+
+cardPopup.addEventListener('click', function (event) {
+  if (event.target === event.currentTarget) {
+    closePopupPlace();
+  }
+});
+
+zoomPopup.addEventListener('click', function (event) {
+  if (event.target === event.currentTarget) {
+    closePopupImage();
+  }
+});
+
+elemet.forEach((button) => {
+
+  button.addEventListener('click', (event)=> {
+
+    const comPopup = event.target.closest('.popup');
+    if(event.target === event.currentTarget) {
+
+      close(comPopup);
+    }
+
+  });
+
+});
+
+
+
+
+
+
+document.addEventListener('keydown', (evt) => {
+  // const popup = document.querySelectorAll('.popup');
+  if(evt.key === 'Escape') {
+
+    closePopup(evt.target);
+
+    // closePopupEdit();
+  }
+})
+
+
+// function handleEscape(evt) {
+//   if (evt.key === 'Escape') {
+//     closePopup(evt.target);
+//   }
+// };
+
+
+
+
+// function handleOverlay(evt) {
+//   if (evt.target === modalWindow) {
+//     closePopup(modalWindow);
+//   }
+// };
+
+
