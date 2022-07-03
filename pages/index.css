@@ -54,7 +54,7 @@
 /* @import url(../blocks/popup/__button/_invalid/popup__button_invalid.css); */
 
 .form__input_type_error {
-  border: 3px solid red; /*TODO*/
+  border-bottom: 20px solid red;
 }
 
 .form__input-error_active {
@@ -70,5 +70,14 @@
   border-color: #C5C5C5;
   color: #C5C5C5;
   background-color: #F6F6F6;
-  
 }
+
+.span-error {
+  position: absolute;
+  top: 28px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+

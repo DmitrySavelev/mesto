@@ -150,69 +150,18 @@ initialCards.forEach(function (element) {//перебор заданного м�
 //Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6
 //Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6
 
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('form__input_type_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('form__input-error_active');
-};
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('form__input_type_error');
-  errorElement.classList.remove('form__input-error_active');
-  errorElement.textContent = '';
-};
-
-const isValid = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  })
-}
-
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('form__submit_inactive');
-    buttonElement.setAttribute('disabled', 'true');
-  } else {
-    buttonElement.classList.remove('form__submit_inactive');
-    buttonElement.removeAttribute('disabled');
-  }
-}
-
-const setEventListeners = (formElement) => {//Установить слушателИ событий (для всех полей в данной форме)
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__button');
-  toggleButtonState(inputList, buttonElement);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-};
-
 enableValidation();
 
 
+// важно ввернуться попозже к этому заданию!!!!!!!!!!!!!!
+//принимает список инпутов, элемент формы и элемент кнопки
+// если чтото то вызываем hideInputError и toggleButtonState и разблокировать либоо заблокировать кнопку
+// function validatePopup(inputList, formElement, inputElement) {
+//   inputList.forEach(element => {
+//     if () {
+//     }
+//   });
+// }
 
 
 
@@ -223,7 +172,7 @@ enableValidation();
 
 
 profilePopup.addEventListener('click', function (event) {
-  if (event.target === event.currentTarget) {closePopupEdit()}
+  if (event.target === event.currentTarget) { closePopupEdit() }
 });
 
 cardPopup.addEventListener('click', function (event) {
@@ -238,19 +187,19 @@ zoomPopup.addEventListener('click', function (event) {
   }
 });
 
-elemet.forEach((button) => {
+// elemet.forEach((button) => {
 
-  button.addEventListener('click', (event)=> {
+//   button.addEventListener('click', (event) => {
 
-    const comPopup = event.target.closest('.popup');
-    if(event.target === event.currentTarget) {
+//     const comPopup = event.target.closest('.popup');
+//     if (event.target === event.currentTarget) {
 
-      close(comPopup);
-    }
+//       close(comPopup);
+//     }
 
-  });
+//   });
 
-});
+// });
 
 
 
@@ -259,7 +208,7 @@ elemet.forEach((button) => {
 
 document.addEventListener('keydown', (evt) => {
   // const popup = document.querySelectorAll('.popup');
-  if(evt.key === 'Escape') {
+  if (evt.key === 'Escape') {
 
     closePopup(evt.target);
 
@@ -282,5 +231,3 @@ document.addEventListener('keydown', (evt) => {
 //     closePopup(modalWindow);
 //   }
 // };
-
-
