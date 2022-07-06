@@ -20,10 +20,29 @@ const linkInputPlace = document.querySelector('.popup__link-input-place');
 const buttonCloseImage = document.querySelector('.popup__button-close_image');
 const imagePopup = document.querySelector('.popup__image');
 
+const closePopupByEsc = (evt) => {//функция закрытия попапа по клавише escape
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  };
+}
+
+const closePopupByOverlay = (evt) => {//функция закрытия попапа по оверлею
+  if (evt.target === evt.currentTarget) {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+}
+
 function openPopup(popup) {// функция открытия любого попапа
+  document.addEventListener('keydown', closePopupByEsc);
+  popup.addEventListener('click', closePopupByOverlay);
   popup.classList.add('popup_opened');
 }
+
 function closePopup(popup) {//// функция закрытия любого попапа
+  document.removeEventListener('keydown', closePopupByEsc);
+  popup.removeEventListener('keydown', closePopupByOverlay);
   popup.classList.remove('popup_opened');
 }
 
@@ -32,6 +51,7 @@ function openPopupEdit() {
   inputName.value = profileName.textContent;//значение со страницы вставляется в инпут
   inputJob.value = profileJob.textContent;//значение со страницы вставляется в инпут
 }
+
 profileEditButton.addEventListener('click', openPopupEdit);
 
 function closePopupEdit() {
@@ -45,13 +65,17 @@ function handleFormSubmit(e) {//функция для отправки форм
   profileJob.textContent = inputJob.value;//на страницу переносится значение из инпута в попапе
   closePopup(profilePopup);//функция включения и отключения класса для отображения попапа
 }
-
 popupFormEdit.addEventListener('submit', handleFormSubmit);
 
 function openPopupPlace() {//функция включения и отключения класса для отображения попапа
   openPopup(cardPopup);
 }
-buttonAdd.addEventListener('click', openPopupPlace);
+
+buttonAdd.addEventListener('click', () => {
+  enableValidation();
+  openPopupPlace();
+}
+);
 
 function closePopupPlace() {//функция включения и отключения класса для отображения попапа
   closePopup(cardPopup);
@@ -113,7 +137,7 @@ function getItem(element) {//функция для заполнения конт
   });
 
   const imageCard = listElement.querySelector('.elements__image');
-  imageCard.addEventListener('click', function zoomImage() {
+  imageCard.addEventListener('click', () => {
     imagePopup.src = element.link;
     const popupCaption = document.querySelector('.popup__caption');
     popupCaption.textContent = titleElement.textContent;
@@ -146,88 +170,4 @@ initialCards.forEach(function (element) {//перебор заданного м�
   renderCard(element);//вызов функции для заполнения контейнера содержимым из template
 });
 
-//Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6
-//Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6
-//Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6 Практическая работа 6
-
-enableValidation();
-
-
-// важно ввернуться попозже к этому заданию!!!!!!!!!!!!!!
-//принимает список инпутов, элемент формы и элемент кнопки
-// если чтото то вызываем hideInputError и toggleButtonState и разблокировать либоо заблокировать кнопку
-// function validatePopup(inputList, formElement, inputElement) {
-//   inputList.forEach(element => {
-//     if () {
-//     }
-//   });
-// }
-
-
-
-
-
-
-
-
-
-profilePopup.addEventListener('click', function (event) {
-  if (event.target === event.currentTarget) { closePopupEdit() }
-});
-
-cardPopup.addEventListener('click', function (event) {
-  if (event.target === event.currentTarget) {
-    closePopupPlace();
-  }
-});
-
-zoomPopup.addEventListener('click', function (event) {
-  if (event.target === event.currentTarget) {
-    closePopupImage();
-  }
-});
-
-// elemet.forEach((button) => {
-
-//   button.addEventListener('click', (event) => {
-
-//     const comPopup = event.target.closest('.popup');
-//     if (event.target === event.currentTarget) {
-
-//       close(comPopup);
-//     }
-
-//   });
-
-// });
-
-
-
-
-
-
-document.addEventListener('keydown', (evt) => {
-  // const popup = document.querySelectorAll('.popup');
-  if (evt.key === 'Escape') {
-
-    closePopup(evt.target);
-
-    // closePopupEdit();
-  }
-})
-
-
-// function handleEscape(evt) {
-//   if (evt.key === 'Escape') {
-//     closePopup(evt.target);
-//   }
-// };
-
-
-
-
-// function handleOverlay(evt) {
-//   if (evt.target === modalWindow) {
-//     closePopup(modalWindow);
-//   }
-// };
+enableValidation(config);// функция для включения валидации форм

@@ -49,17 +49,15 @@
         <button type="button" class="popup__button-close popup__button-close_edit"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form method="get" name="popupForm" class="popup__form popup__form_edit" novalidate>
-          <label class="form__field">
-            <div class="input-wrapper">
-              <input name="inputName" type="text" id="name-input" class="popup__input popup__input_name"
-                placeholder="Жак-Ив Кусто" minlength="2" maxlength="40" required>
-              <span class="span-error name-input-error popup__input_name-error"></span>
-            </div>
-            <div class="input-wrapper">
-              <input name="inputJob" type="text" id="job-input" class="popup__input popup__input_job"
-                placeholder="Исследователь океана" minlength="2" maxlength="200" required>
-              <span class="span-error job-input-error popup__input_job-error"></span>
-            </div>
+          <label class="popup__form-field">
+            <input name="inputName" type="text" id="name-input" class="popup__input popup__input_name"
+              placeholder="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+            <span class="popup__input_span name-input-error popup__input_name-error"></span>
+          </label>
+          <label class="popup__form-field">
+            <input name="inputJob" type="text" id="job-input" class="popup__input popup__input_job"
+              placeholder="Исследователь океана" minlength="2" maxlength="200" required>
+            <span class="popup__input_span job-input-error popup__input_job-error"></span>
           </label>
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
@@ -71,18 +69,15 @@
         <button type="button" class="popup__button-close popup__button-close_place"></button>
         <h2 class="popup__title">Новое место</h2>
         <form method="get" name="popupForm" class="popup__form popup__form_place" novalidate>
-          <label class="form__field">
-            <div class="input-wrapper">
-              <input name="inputName" type="text" id="name-place-input" class="popup__input popup__name-input-place"
-                placeholder="Название" minlength="2" maxlength="30" required>
-              <span class="span-error name-place-input-error popup__name-input-place-error"></span>
-            </div>
-            <div class="input-wrapper">
-              <input name="inputLink" type="url" id="url-input" class="popup__input popup__link-input-place"
-                placeholder="Ссылка на картинку" required>
-              <span class="span-error url-input-error popup__link-input-place-error"></span>
-            </div>
-
+          <label class="popup__form-field">
+            <input name="inputName" type="text" id="name-place-input" class="popup__input popup__name-input-place"
+              placeholder="Название" minlength="2" maxlength="30" required>
+            <span class="popup__input_span name-place-input-error popup__name-input-place-error"></span>
+          </label>
+          <label class="popup__form-field">
+            <input name="inputLink" type="url" id="url-input" class="popup__input popup__link-input-place"
+              placeholder="Ссылка на картинку" required>
+            <span class="popup__input_span url-input-error popup__link-input-place-error"></span>
           </label>
           <button type="submit" class="popup__button">Сохранить</button>
         </form>

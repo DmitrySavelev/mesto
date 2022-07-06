@@ -9,7 +9,6 @@
   padding: 34px 36px 37px;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 @media (max-width: 1279px) {
