@@ -42,7 +42,7 @@ function openPopup(popup) {// функция открытия любого по�
 
 function closePopup(popup) {//// функция закрытия любого попапа
   document.removeEventListener('keydown', closePopupByEsc);
-  popup.removeEventListener('keydown', closePopupByOverlay);
+  popup.removeEventListener('click', closePopupByOverlay);
   popup.classList.remove('popup_opened');
 }
 
