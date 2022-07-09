@@ -12,22 +12,23 @@ const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
 const cardTemplate = document.querySelector("#template").content;
-const cardContainer = document.querySelector(".elements__card"); //контейнер для вставки из template
+const cardsContainer = document.querySelector(".elements__card"); //контейнер для вставки из template
 const buttonAdd = document.querySelector(".profile__add-button");
 const buttonClosePlace = document.querySelector(".popup__button-close_place");
 const nameInputPlace = document.querySelector(".popup__name-input-place");
 const linkInputPlace = document.querySelector(".popup__link-input-place");
 const buttonCloseImage = document.querySelector(".popup__button-close_image");
 const imagePopup = document.querySelector(".popup__image");
+const popupCaption = document.querySelector(".popup__caption");
 
 const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_visible'
-}
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_visible",
+};
 
 //функция закрытия попапа по клавише escape
 const closePopupByEsc = (evt) => {
@@ -118,10 +119,9 @@ function createCard(card) {
   });
 
   const imageCard = listCard.querySelector(".elements__image");
-  const popupCaption = document.querySelector(".popup__caption");
   const zoomCard = () => {
     imagePopup.src = card.link;
-    popupCaption.textContent = titleCard.textContent;
+    popupCaption.textContent = card.name;
     openPopupImage();
   };
   imageCard.addEventListener("click", zoomCard);
@@ -132,9 +132,9 @@ function createCard(card) {
 function renderCard(card, needToPrepend = false) {
   const listCard = createCard(card);
   if (needToPrepend) {
-    cardContainer.prepend(listCard);
+    cardsContainer.prepend(listCard);
   } else {
-    cardContainer.append(listCard);
+    cardsContainer.append(listCard);
   }
 }
 
@@ -144,7 +144,7 @@ function handleAddCardSubmit(e) {
   const obj = { name: nameInputPlace.value, link: linkInputPlace.value };
   renderCard(obj, true);
   closePopupPlace();
-  e.target.reset();
+  popupFormPlace.reset();
 }
 
 initialCards.forEach(function (card) {
