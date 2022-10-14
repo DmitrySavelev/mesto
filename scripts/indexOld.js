@@ -98,19 +98,61 @@ function openPopupImage() {
   openPopup(zoomPopup);
 }
 
-const newCard = new Card;
+function createCard(card) {
+  //функция для заполнения контейнера содержимым из template
+  const listCard = cardTemplate.cloneNode(true); //клонирование шаблона
+  const titleCard = listCard.querySelector(".elements__title"); //переменная содержащая заголовок
+  titleCard.textContent = card.name; //берем из массива элемент с ключом name
+  const cardImage = listCard.querySelector(".elements__image"); //переменная содержащая ссылку на картинку
+  cardImage.src = card.link; //берем из массива элемент с ключом link
+  cardImage.alt = card.name; //присваиваем картинке из объекта альт с названием из объекта же
 
-initialCards.forEach((card) => {
+  const likeButton = listCard.querySelector(".elements__like"); //переменная содержащая кнопку лайк
+  likeButton.addEventListener("click", () => {
+    //функция для переключения состояния лайка
+    likeButton.classList.toggle("elements__like_active");
+  });
+
+  const deleteButton = listCard.querySelector(".elements__delete"); //переменная содержащая кнопку удаления карточки
+  const cardElement = listCard.querySelector(".elements__list");
+  deleteButton.addEventListener("click", function () {
+    //функция для удаления карточки по кнопке контейнера
+    cardElement.remove();
+  });
+
+  const imageCard = listCard.querySelector(".elements__image");
+  const zoomCard = () => {
+    imagePopup.src = card.link;
+    popupCaption.textContent = card.name;
+    openPopupImage();
+  };
+  imageCard.addEventListener("click", zoomCard);
+
+  return listCard;
+}
+
+function renderCard(card, needToPrepend = false) {
+  const listCard = createCard(card);
+  if (needToPrepend) {
+    cardsContainer.prepend(listCard);
+  } else {
+    cardsContainer.append(listCard);
+  }
+}
+
+//функция для добавления новой карточки
+function handleAddCardSubmit(e) {
+  e.preventDefault();
+  const obj = { name: nameInputPlace.value, link: linkInputPlace.value };
+  renderCard(obj, true);
+  closePopupPlace();
+  popupFormPlace.reset();
+}
+
+initialCards.forEach(function (card) {
   //перебор заданного массива
-  newCard.renderCard(card); //вызов функции для заполнения контейнера содержимым из template
+  renderCard(card); //вызов функции для заполнения контейнера содержимым из template
 });
-
-popupFormPlace.addEventListener("submit", newCard.handleAddCardSubmit);
-
-
-
-
-
 
 profileEditButton.addEventListener("click", openPopupEdit);
 buttonCloseEdit.addEventListener("click", closePopupEdit);
@@ -118,9 +160,10 @@ popupFormEdit.addEventListener("submit", handleEditProfileFormSubmit);
 buttonAdd.addEventListener("click", openPopupPlace);
 buttonClosePlace.addEventListener("click", closePopupPlace);
 buttonCloseImage.addEventListener("click", closePopupImage);
+popupFormPlace.addEventListener("submit", handleAddCardSubmit);
 
 const formValidatorEdit = new FormValidator(validationConfig, formEdit);
 const formValidatorCard = new FormValidator(validationConfig, formCard);
 
 formValidatorEdit.enableValidation();
-formValidatorCard.enableValidation();
+formValidatorCard.enableValidation();      

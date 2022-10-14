@@ -1,83 +1,91 @@
-//функция которая добавляет класс с ошибкой
-const showInputError = (formElement, inputElement, errorMessage, config) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(config.inputErrorClass);
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add(config.errorClass);
-};
+class FormValidator {
+  constructor(config, classForm) {
+    this.formSelector = config.formSelector;  //formSelector: ".popup__form",
+    this.inputSelector = config.inputSelector;    //inputSelector: ".popup__input",
+    this.submitButtonSelector = config.submitButtonSelector;
+    this.inactiveButtonClass = config.inactiveButtonClass;
+    this.inputErrorClass = config.inputErrorClass;
+    this.errorClass = config.errorClass;
 
-//функция которая удаляет класс с ошибкой
-const hideInputError = (formElement, inputElement, config) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(config.inputErrorClass);
-  errorElement.classList.remove(config.errorClass);
-  errorElement.textContent = "";
-};
+    this.classForm = classForm;
+    this.formList = Array.from(document.querySelectorAll(this.formSelector));//это мы создаем массив всех форм
+    this.inputList = Array.from(this.classForm.querySelectorAll(this.inputSelector)); //массив всех полей формы
+    this.buttonElement = this.classForm.querySelector(this.submitButtonSelector); // кнопка данной формы
+  }
 
-//функция которая проверяет валидность поля
-const isValid = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(
-      formElement,
-      inputElement,
-      inputElement.validationMessage,
-      validationConfig
+  //функция которая добавляет класс с ошибкой
+  _showInputError(inputElement) {
+    const errorElement = this.classForm.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add(this.inputErrorClass);
+    errorElement.textContent = inputElement.validationMessage;
+    errorElement.classList.add(this.errorClass);
+  };
+
+  //функция которая удаляет класс с ошибкой
+  _hideInputError(inputElement) {
+    const errorElement = this.classForm.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove(this.inputErrorClass);
+    errorElement.classList.remove(this.errorClass);
+    errorElement.textContent = "";
+  };
+
+  //функция которая проверяет валидность поля
+  _isValid(inputElement) {
+    if (!inputElement.validity.valid) {
+      this._showInputError(
+        inputElement
+      );
+    } else {
+      this._hideInputError(inputElement);
+    }
+  };
+
+  //проверяем все инпуты на валидность
+  _hasInvalidInput() {
+    return this.inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+    });
+  };
+
+  //устанавливаем статус кнопки (активна или неактивна)
+  _toggleButtonState() {
+    if (this._hasInvalidInput(this.inputList)) {
+      this.buttonElement.classList.add(this.inactiveButtonClass);
+      this.buttonElement.setAttribute("disabled", "true");
+      this.buttonElement.disabled = "true";
+    } else {
+      this.buttonElement.classList.remove(this.inactiveButtonClass);
+      this.buttonElement.disabled = false;
+    }
+  };
+
+  //блокирование кнопки при открытии попапа добавления новой карточки
+  _disableButton() {
+    this.buttonElement.classList.add(this.inactiveButtonClass);
+    this.buttonElement.setAttribute("disabled", true);
+  }
+
+  //Установить слушателИ событий (для всех полей в данной форме)
+  _setEventListeners() {
+    this._toggleButtonState(this.inputList, this.buttonElement);
+    this.inputList.forEach((inputElement) => {
+      inputElement.addEventListener("input", () => {
+        this._isValid(inputElement);
+        this._toggleButtonState(this.inputList, this.buttonElement);
+      });
+    });
+    this.classForm.addEventListener("reset", () =>
+      this._disableButton()
     );
-  } else {
-    hideInputError(formElement, inputElement, validationConfig);
-  }
-};
+  };
 
-//проверяем все инпуты на валидность
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-};
-
-//устанавливаем статус кнопки (активна или неактивна)
-const toggleButtonState = (inputList, buttonElement, config) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(config.inactiveButtonClass);
-    buttonElement.setAttribute("disabled", "true");
-    buttonElement.disabled = "true";
-  } else {
-    buttonElement.classList.remove(config.inactiveButtonClass);
-    buttonElement.disabled = false;
-  }
-};
-
-//блокирование кнопки при открытии попапа добавления новой карточки
-function disableButton(buttonElement, config) {
-  buttonElement.classList.add(config.inactiveButtonClass);
-  buttonElement.setAttribute("disabled", true);
+  // добавление обработчиков всем формам
+  enableValidation = () => {
+    this.formList.forEach((formElement) => {
+      formElement.addEventListener("submit", (evt) => {
+        evt.preventDefault();
+      });
+      this._setEventListeners(formElement);
+    });
+  };
 }
-
-//Установить слушателИ событий (для всех полей в данной форме)
-const setEventListeners = (formElement, config) => {
-  const inputList = Array.from(
-    formElement.querySelectorAll(config.inputSelector)
-  );
-  const buttonElement = formElement.querySelector(config.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, validationConfig);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", () => {
-      isValid(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement, validationConfig);
-    });
-  });
-  formElement.addEventListener("reset", () =>
-    disableButton(buttonElement, validationConfig)
-  );
-};
-
-// добавление обработчиков всем формам
-const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement, validationConfig);
-  });
-};
