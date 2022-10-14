@@ -153,6 +153,7 @@ initialCards.forEach(function (card) {
 });
 
 enableValidation(validationConfig); // функция для включения валидации форм
+// formValidator.enableValidation(); // функция для включения валидации форм
 
 profileEditButton.addEventListener("click", openPopupEdit);
 buttonCloseEdit.addEventListener("click", closePopupEdit);
