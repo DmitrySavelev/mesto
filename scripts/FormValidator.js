@@ -13,7 +13,6 @@ class FormValidator {
     this.buttonElement = this.classForm.querySelector(this.submitButtonSelector); // кнопка данной формы
   }
 
-
   //функция которая добавляет класс с ошибкой
   _showInputError(inputElement) {
     const errorElement = this.classForm.querySelector(`.${inputElement.id}-error`);

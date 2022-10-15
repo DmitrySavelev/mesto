@@ -1,4 +1,5 @@
 class Card {
+
   constructor(data, template) {
     this._name = data.name;
     this._link = data.link;
@@ -13,29 +14,31 @@ class Card {
     }
   }
 
-  // _handleLike () {
-  //   this._element.querySelector(".elements__like").classList.toggle("elements__like_active");
-  // }
+  _handleLike() {
+    this.likeButton.classList.toggle("elements__like_active");
+  }
+
+  _handleDelete() {
+    this.cardElement.remove();
+    this.cardElement = null;
+  }
+
+  _zoomCard = () => {
+    imagePopup.src = this._link;
+    popupCaption.textContent = this._name;
+    openPopup(zoomPopup);
+  };
 
   _setListeners() {
-    const likeButton = this._element.querySelector(".elements__like"); //переменная содержащая кнопку лайк
-    likeButton.addEventListener("click", () => {
-      likeButton.classList.toggle("elements__like_active");
-    });
-    const deleteButton = this._element.querySelector(".elements__delete"); //переменная содержащая кнопку удаления карточки
-    const cardElement = this._element.querySelector(".elements__list");
-    deleteButton.addEventListener("click", function () {
-      //функция для удаления карточки по кнопке контейнера
-      cardElement.remove();
-    });
+    this.likeButton = this._element.querySelector(".elements__like");
+    this.likeButton.addEventListener("click", () => this._handleLike());
 
-    const imageCard = this._element.querySelector(".elements__image");
-    const zoomCard = () => {
-      imagePopup.src = this._link;
-      popupCaption.textContent = this._name;
-      openPopupImage();
-    };
-    imageCard.addEventListener("click", zoomCard);
+    this.deleteButton = this._element.querySelector(".elements__delete");
+    this.cardElement = this._element.querySelector(".elements__list");
+    this.deleteButton.addEventListener("click", () => this._handleDelete());
+
+    this.imageCard = this._element.querySelector(".elements__image");
+    this.imageCard.addEventListener("click", this._zoomCard);
   }
 
   _getTemplate() {
@@ -50,7 +53,7 @@ class Card {
     this._element.querySelector(".elements__image").src = this._link;
     this._element.querySelector(".elements__image").alt = this._name;
 
-    this._setListeners()
+    this._setListeners();
 
     return this._element;
   }

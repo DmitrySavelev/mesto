@@ -32,6 +32,7 @@ const validationConfig = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_visible",
 };
+
 //функция закрытия попапа по клавише escape
 const closePopupByEsc = (evt) => {
   if (evt.key === "Escape") {
@@ -98,12 +99,6 @@ function openPopupImage() {
   openPopup(zoomPopup);
 }
 
-initialCards.forEach((cardElem) => {
-  //перебор заданного массива
-  const card = new Card(cardElem, cardTemplate);
-  card.renderCard(cardElem); //вызов функции для заполнения контейнера содержимым из template
-});
-
 //функция для добавления новой карточки
 function handleAddCardSubmit(e) {
   e.preventDefault();
@@ -113,6 +108,12 @@ function handleAddCardSubmit(e) {
   closePopupPlace();
   popupFormPlace.reset();
 }
+
+initialCards.forEach((cardElem) => {
+  //перебор заданного массива
+  const card = new Card(cardElem, cardTemplate);
+  card.renderCard(cardElem); //вызов функции для заполнения контейнера содержимым из template
+});
 
 const formValidatorEdit = new FormValidator(validationConfig, formEdit);
 const formValidatorCard = new FormValidator(validationConfig, formCard);
