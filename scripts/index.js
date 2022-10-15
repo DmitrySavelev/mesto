@@ -98,19 +98,27 @@ function openPopupImage() {
   openPopup(zoomPopup);
 }
 
-const newCard = new Card;
-
-initialCards.forEach((card) => {
+initialCards.forEach((cardElem) => {
   //перебор заданного массива
-  newCard.renderCard(card); //вызов функции для заполнения контейнера содержимым из template
+  const card = new Card(cardElem, cardTemplate);
+  card.renderCard(cardElem); //вызов функции для заполнения контейнера содержимым из template
 });
 
-popupFormPlace.addEventListener("submit", newCard.handleAddCardSubmit);
+//функция для добавления новой карточки
+function handleAddCardSubmit(e) {
+  e.preventDefault();
+  const obj = { name: nameInputPlace.value, link: linkInputPlace.value };
+  const card = new Card(obj, cardTemplate);
+  card.renderCard(obj, true);
+  closePopupPlace();
+  popupFormPlace.reset();
+}
 
+const formValidatorEdit = new FormValidator(validationConfig, formEdit);
+const formValidatorCard = new FormValidator(validationConfig, formCard);
 
-
-
-
+formValidatorEdit.enableValidation();
+formValidatorCard.enableValidation();
 
 profileEditButton.addEventListener("click", openPopupEdit);
 buttonCloseEdit.addEventListener("click", closePopupEdit);
@@ -118,9 +126,4 @@ popupFormEdit.addEventListener("submit", handleEditProfileFormSubmit);
 buttonAdd.addEventListener("click", openPopupPlace);
 buttonClosePlace.addEventListener("click", closePopupPlace);
 buttonCloseImage.addEventListener("click", closePopupImage);
-
-const formValidatorEdit = new FormValidator(validationConfig, formEdit);
-const formValidatorCard = new FormValidator(validationConfig, formCard);
-
-formValidatorEdit.enableValidation();
-formValidatorCard.enableValidation();
+popupFormPlace.addEventListener("submit", handleAddCardSubmit);

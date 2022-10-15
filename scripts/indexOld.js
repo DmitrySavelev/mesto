@@ -166,4 +166,4 @@ const formValidatorEdit = new FormValidator(validationConfig, formEdit);
 const formValidatorCard = new FormValidator(validationConfig, formCard);
 
 formValidatorEdit.enableValidation();
-formValidatorCard.enableValidation();      
+formValidatorCard.enableValidation();
