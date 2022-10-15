@@ -6,7 +6,6 @@ class FormValidator {
     this.inactiveButtonClass = config.inactiveButtonClass;
     this.inputErrorClass = config.inputErrorClass;
     this.errorClass = config.errorClass;
-
     this.classForm = classForm;
     this.formList = Array.from(document.querySelectorAll(this.formSelector));//это мы создаем массив всех форм
     this.inputList = Array.from(this.classForm.querySelectorAll(this.inputSelector)); //массив всех полей формы
