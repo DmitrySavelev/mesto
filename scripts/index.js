@@ -1,3 +1,7 @@
+import { initialCards } from "./cards.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+
 const profilePopup = document.querySelector(".popup_edit");
 const cardPopup = document.querySelector(".popup_card");
 const zoomPopup = document.querySelector(".popup_zoom");
@@ -98,20 +102,26 @@ function openPopupImage() {
   openPopup(zoomPopup);
 }
 
+function handleOpenPopupZoom(name, link) {
+  imagePopup.src = link;
+  popupCaption.textContent = name;
+  openPopup(zoomPopup);
+}
+
 //функция для добавления новой карточки
 function handleAddCardSubmit(e) {
   e.preventDefault();
   const objectCard = { name: nameInputPlace.value, link: linkInputPlace.value };
-  const card = new Card(objectCard, cardTemplate);
-  card.renderCard(objectCard, true);
+  const card = new Card(objectCard, '#template', handleOpenPopupZoom);
+  card.createCard(cardsContainer, true);
   closePopupPlace();
   popupFormPlace.reset();
 }
 
 initialCards.forEach((cardElem) => {
   //перебор заданного массива
-  const card = new Card(cardElem, cardTemplate);
-  card.renderCard(cardElem); //вызов функции для заполнения контейнера содержимым из template
+  const card = new Card(cardElem, '#template', handleOpenPopupZoom);
+  card.createCard(cardsContainer); //вызов функции для заполнения контейнера содержимым из template
 });
 
 const formValidatorEdit = new FormValidator(validationConfig, formEdit);
