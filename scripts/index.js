@@ -44,8 +44,7 @@ const closePopupByEsc = (evt) => {
 //функция закрытия попапа по оверлею
 const closePopupByOverlay = (evt) => {
   if (evt.target === evt.currentTarget) {
-    const popup = document.querySelector(".popup_opened");
-    closePopup(popup);
+    closePopup(evt.currentTarget);
   }
 };
 
@@ -102,9 +101,9 @@ function openPopupImage() {
 //функция для добавления новой карточки
 function handleAddCardSubmit(e) {
   e.preventDefault();
-  const obj = { name: nameInputPlace.value, link: linkInputPlace.value };
-  const card = new Card(obj, cardTemplate);
-  card.renderCard(obj, true);
+  const objectCard = { name: nameInputPlace.value, link: linkInputPlace.value };
+  const card = new Card(objectCard, cardTemplate);
+  card.renderCard(objectCard, true);
   closePopupPlace();
   popupFormPlace.reset();
 }
