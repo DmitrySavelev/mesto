@@ -122,7 +122,7 @@ function handleAddCardSubmit(e) {
 }
 
 initialCards.forEach((cardElem) => {
-  //перебор заданного массива
+  //перебор заданого массива
   const card = new Card(cardElem, '#template', handleOpenPopupZoom);
   insertCard(card.createCard(), cardsContainer);
 });
