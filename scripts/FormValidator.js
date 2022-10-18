@@ -45,7 +45,7 @@ export class FormValidator {
 
   //устанавливаем статус кнопки (активна или неактивна)
   _toggleButtonState() {
-    if (this._hasInvalidInput(this._inputList)) {
+    if (this._hasInvalidInput()) {
       this._disableButton();
     } else {
       this._enableButton();

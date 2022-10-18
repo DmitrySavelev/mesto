@@ -15,7 +15,6 @@ const inputJob = document.querySelector(".popup__input_job");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
-const cardTemplate = document.querySelector("#template").content;
 const cardsContainer = document.querySelector(".elements__card"); //контейнер для вставки из template
 const buttonAdd = document.querySelector(".profile__add-button");
 const buttonClosePlace = document.querySelector(".popup__button-close_place");
@@ -98,14 +97,18 @@ function closePopupImage() {
   closePopup(zoomPopup);
 }
 
-function openPopupImage() {
-  openPopup(zoomPopup);
-}
-
 function handleOpenPopupZoom(name, link) {
   imagePopup.src = link;
   popupCaption.textContent = name;
   openPopup(zoomPopup);
+}
+
+function insertCard(element, container, needToPrepend = false) {
+  if (needToPrepend) {
+    container.prepend(element);
+  } else {
+    container.append(element);
+  }
 }
 
 //функция для добавления новой карточки
@@ -113,7 +116,7 @@ function handleAddCardSubmit(e) {
   e.preventDefault();
   const objectCard = { name: nameInputPlace.value, link: linkInputPlace.value };
   const card = new Card(objectCard, '#template', handleOpenPopupZoom);
-  card.createCard(cardsContainer, true);
+  insertCard(card.createCard(), cardsContainer, true);
   closePopupPlace();
   popupFormPlace.reset();
 }
@@ -121,7 +124,7 @@ function handleAddCardSubmit(e) {
 initialCards.forEach((cardElem) => {
   //перебор заданного массива
   const card = new Card(cardElem, '#template', handleOpenPopupZoom);
-  card.createCard(cardsContainer); //вызов функции для заполнения контейнера содержимым из template
+  insertCard(card.createCard(), cardsContainer);
 });
 
 const formValidatorEdit = new FormValidator(validationConfig, formEdit);

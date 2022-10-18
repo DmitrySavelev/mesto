@@ -6,20 +6,18 @@ export class Card {
     this._handleOpenPopupZoom = handleOpenPopupZoom;
   }
 
-  createCard(out, needToPrepend = false) {
+  createCard() {
     //функция для заполнения контейнера содержимым из template
     this._element = this._getTemplate();
     this._element.querySelector(".elements__title").textContent = this._name;
-    this._element.querySelector(".elements__image").src = this._link;
-    this._element.querySelector(".elements__image").alt = this._name;
+
+    this._imageCard = this._element.querySelector(".elements__image");
+    this._imageCard.src = this._link;
+    this._imageCard.alt = this._name;
 
     this._setListeners();
 
-    if (needToPrepend) {
-      out.prepend(this._element);
-    } else {
-      out.append(this._element);
-    }
+    return this._element;
   }
 
   _handleLike() {
@@ -40,7 +38,6 @@ export class Card {
     this._deleteButton = this._element.querySelector(".elements__delete");
     this._deleteButton.addEventListener("click", () => this._handleDelete());
 
-    this._imageCard = this._element.querySelector(".elements__image");
     this._imageCard.addEventListener("click", () => this._handleOpenPopupZoom(this._name, this._link));
   }
 
