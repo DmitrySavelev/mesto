@@ -1,6 +1,20 @@
-import { initialCards } from "./cards.js";
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
+import '../pages/index.css';
+import { initialCards } from "../components/cards.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+
+// // теперь картинки можно импортировать,
+// // вебпак добавит в переменные правильные пути
+// import jordanImage from './images/jordan.jpg';
+// import jamesImage from './images/james.jpg';
+// import bryantImage from './images/bryant.jpg';
+
+// const whoIsTheGoat = [
+//   // меняем исходные пути на переменные
+//   { name: 'Michael Jordan', image: jordanImage },
+//   { name: 'Lebron James', link: jamesImage },
+//   { name: 'Kobe Bryant', link: bryantImage },
+// ];
 
 const profilePopup = document.querySelector(".popup_edit");
 const cardPopup = document.querySelector(".popup_card");
