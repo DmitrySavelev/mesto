@@ -6,12 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mesto</title>
   <link rel="stylesheet" href="pages/index.css" />
-  <script src="scripts/index.js" type="module"></script>
 </head>
 <body class="root">
   <div class="page">
     <header class="header">
-      <img src="<%=require('./images/header__logo.svg')%>"alt="Надпись Mesto с индексом RUSSIA" class="header__logo" />
+      <img src="<%=require('./images/header__logo.svg')%>" alt="Надпись Mesto с индексом RUSSIA" class="header__logo" />
     </header>
     <main class="content">
       <section class="profile">
@@ -59,12 +58,12 @@
         <h2 class="popup__title">Новое место</h2>
         <form name="popupForm" class="popup__form popup__form_place" novalidate>
           <label class="popup__form-field">
-            <input name="inputName" type="text" id="name-place-input" class="popup__input popup__name-input-place"
+            <input name="name" type="text" id="name-place-input" class="popup__input popup__name-input-place"
               placeholder="Название" minlength="2" maxlength="30" required />
             <span class="popup__error name-place-input-error"></span>
           </label>
           <label class="popup__form-field">
-            <input name="inputLink" type="url" id="url-input" class="popup__input popup__link-input-place"
+            <input name="link" type="url" id="url-input" class="popup__input popup__link-input-place"
               placeholder="Ссылка на картинку" required />
             <span class="popup__error url-input-error"></span>
           </label>

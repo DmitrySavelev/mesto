@@ -2,22 +2,24 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключите плагин
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { SourceMap } = require('module');
 
 module.exports = {
-    entry: { main: './src/pages/index.js' },
-    output: {
+  entry: { main: './src/pages/index.js' },
+  output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
-        publicPath: ''
+    publicPath: ''
   },
-    mode: 'development',
+  mode: "development",
+  devtool: "inline-source-map",
   devServer: {
     static: path.resolve(__dirname, './dist'),
     compress: true,
     port: 8080,
     open: true
   },
-    module: {
+  module: {
     rules: [ // rules — это массив правил
       // добавим в него объект правил для бабеля
       {
@@ -42,9 +44,9 @@ module.exports = {
           loader: 'css-loader',
           options: { importLoaders: 1 }
         },
-        'postcss-loader']
+          'postcss-loader']
       },
-      ]
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -53,4 +55,5 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
   ],
+
 };
