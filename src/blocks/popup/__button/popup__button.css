@@ -10,7 +10,7 @@
   border: none;
 }
 
-.popup__button:hover {
+.popup__button:valid:hover {
   opacity: 80%;
   cursor: pointer;
 }
