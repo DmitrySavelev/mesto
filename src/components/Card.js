@@ -8,7 +8,7 @@ export default class Card {
 
   createCard() {
     //функция для заполнения контейнера содержимым из template
-    this._element = this._getTemplate();
+    this._element = this._getTemplate(); 
 
     this.titleCard = this._element.querySelector(".elements__title");
     this.titleCard.textContent = this._name;

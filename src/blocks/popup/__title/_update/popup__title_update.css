@@ -1,13 +1,13 @@
-.popup__title {
+.popup__title_update {
   margin: 0;
   font-size: 24px;
   font-weight: 900;
-  line-height: 29px; 
-  margin-bottom: 48px;
+  line-height: 29px;
+  margin-bottom: 46px;
 }
 
 @media (max-width: 1279px) {
-  .popup__title {
+  .popup__title_update {
     font-size: 18px;
     line-height: 22px;
     margin-bottom: 75px;

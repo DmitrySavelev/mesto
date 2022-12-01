@@ -15,17 +15,20 @@
     <main class="content">
       <section class="profile">
         <div class="profile__wrapper">
-          <img src="<%=require('./images/profile__avatar.jpg')%>" alt="аватарка человека" class="profile__avatar" />
+          <img src="#" alt="аватарка человека" class="profile__avatar" />
           <div class="profile__info">
             <div class="profile__paragraph-btn">
-              <h1 class="profile__name">Кусто</h1>
+              <h1 class="profile__name">Имя юзера</h1>
               <button type="button" aria-label="редактировать" class="profile__edit-button"></button>
             </div>
-            <p class="profile__job">Исследователь океана</p>
+            <p class="profile__job">Специализация</p>
           </div>
         </div>
         <button type="button" aria-label="добавить новую карточку" class="profile__add-button"></button>
       </section>
+      <div class="cont">
+
+      </div>
       <section class="elements">
         <ul class="elements__card"></ul>
       </section>
@@ -78,6 +81,27 @@
         <img src="#" alt="" class="popup__image" />
         <figcaption class="popup__caption"></figcaption>
       </figure>
+    </section>
+    <section class="popup popup_delete ">
+      <div class="popup__container_delete">
+        <button type="button" aria-label="закрыть попап" class="popup__button-close"></button>
+        <h2 class="popup__title_delete">Вы уверены?</h2>
+        <button class="popup__button_delete">Да</button>
+      </div>
+    </section>
+    <section class="popup popup_update">
+      <div class="popup__container_update">
+        <button type="button" aria-label="закрыть попап" class="popup__button-close"></button>
+        <h2 class="popup__title_update">Обновить аватар</h2>
+        <form name="popupForm" class="popup__form popup__form_update" novalidate>
+          <label class="popup__form-field">
+            <input name="link" type="url" id="url-input" class="popup__input popup__link-input-update"
+              placeholder="Ссылка на новую аватарку" required />
+            <span class="popup__error url-input-error"></span>
+          </label>
+          <button type="submit" class="popup__button">Сохранить</button>
+        </form>
+      </div>
     </section>
   </div>
   <template id="template">

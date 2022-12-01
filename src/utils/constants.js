@@ -41,3 +41,5 @@ export const inputJob = document.querySelector(".popup__input_job");
 export const buttonAdd = document.querySelector(".profile__add-button");
 export const formEdit = document.querySelector('.popup__form_edit');
 export const formCard = document.querySelector('.popup__form_place');
+export const apiUrl = "https://mesto.nomoreparties.co/v1/cohort-52/cards";
+export const authCode = '361c91ce-0b5b-4b28-8fa8-f531692733fd';

@@ -1,14 +1,18 @@
 export default class Section {
-  constructor({ items, renderer }, selector) {
-    this._renderedItems = items;
+  constructor({ renderer }, selector, api) {
     this._renderer = renderer;
+    this._api = api;
     this._container = document.querySelector(selector);
   }
 
   renderItems() { // отвечает за отрисовку всех элементов
-    this._renderedItems.forEach(item => {
-      this._renderer(item);
-    });
+    this._api.getAllCards()
+      .then((data) => {
+        data.forEach(item => {
+          this._renderer(item);
+        });
+      })
+      .catch(error => console.error(error));
   }
 
   addItem(itemHtml, needToPrepend = false) {   // принимает DOM-элемент и добавляет его в контейнер
