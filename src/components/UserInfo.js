@@ -1,19 +1,14 @@
 export default class UserInfo {
-  constructor(nameSelector, jobSelector, avatarSelector, api) {
-    this._api = api;
+  constructor(nameSelector, jobSelector, avatarSelector) {
     this._nameSelector = document.querySelector(nameSelector);
     this._jobSelector = document.querySelector(jobSelector);
     this._avatarSelector = document.querySelector(avatarSelector);
   }
 
-  renderUserInfo() {
-    this._api.getUserInfo()
-      .then((data) => {
-        this._nameSelector.textContent = data.name;
-        this._jobSelector.textContent = data.about;
-        this._avatarSelector.src = data.avatar;
-      })
-      .catch(error => console.error(error));
+  renderUserInfo(data) {
+    this._nameSelector.textContent = data.name;
+    this._jobSelector.textContent = data.about;
+    this._avatarSelector.src = data.avatar;
   }
 
   //   Содержит публичный метод getUserInfo, который возвращает объект с данными пользователя.
@@ -26,8 +21,10 @@ export default class UserInfo {
   }
 
   // Содержит публичный метод setUserInfo, который принимает новые данные пользователя и добавляет их на страницу.
-  setUserInfo(name, job) {
-    this._nameSelector.textContent = name;
-    this._jobSelector.textContent = job
+  setUserInfo(data) {
+    this._nameSelector.textContent = data.name;
+    this._jobSelector.textContent = data.about;
+    this._avatarSelector.src = data.avatar;
   }
+
 }

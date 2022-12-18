@@ -1,9 +1,9 @@
-.popup__container_delete {
+.popup__container_avatar {
   position: relative;
   box-sizing: border-box;
   width: 100%;
   max-width: 430px;
-  min-height: 181px;
+  min-height: 272px;
   background-color: #fff;
   border-radius: 10px;
   color: #000;
@@ -13,9 +13,9 @@
 }
 
 @media (max-width: 1279px) {
-  .popup__container_delete {
+  .popup__container_avatar {
     width: 282px;
-    height: 180px;
+    height: 322px;
     padding: 25px 22px;
   }
 }

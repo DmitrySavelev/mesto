@@ -1,7 +1,7 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
-  } 
+  }
 
   open() {
     document.addEventListener("keydown", this._closePopupByEsc);
@@ -11,6 +11,7 @@ export default class Popup {
   close() {
     document.removeEventListener("keydown", this._closePopupByEsc);
     this._popup.classList.remove("popup_opened");
+    this._currentCardId = null;
   }
 
   _closePopupByEsc = (evt) => {
@@ -26,6 +27,8 @@ export default class Popup {
       }
     })
   }
+
+
 
 }
 
