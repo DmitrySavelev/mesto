@@ -26,7 +26,7 @@ export default class PopupDelete extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    const popupButtonDelete = document.querySelector(".popup__button_delete");
+    const popupButtonDelete = document.querySelector(".popup__button-delete");
     popupButtonDelete.addEventListener('click', () => {
       this._handlerDeleteClick();
     })
