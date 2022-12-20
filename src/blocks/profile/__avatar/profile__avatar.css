@@ -4,6 +4,7 @@
   border-radius: 50%;
   object-fit: cover;
   position: relative;
+  cursor: pointer;
 }
 
 .profile__avatar:hover::before {

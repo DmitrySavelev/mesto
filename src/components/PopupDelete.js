@@ -18,10 +18,7 @@ export default class PopupDelete extends Popup {
   }
 
   _handlerDeleteClick() {
-    const elem = document.getElementById(this._currentCardId);
-    elem.remove();
     this._handleDeleteCard(this._currentCardId);
-    this.close();
   }
 
   setEventListeners() {

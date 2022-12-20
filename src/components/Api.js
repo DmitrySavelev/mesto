@@ -1,6 +1,7 @@
 export default class Api {
-  constructor(authCode) {
-    this._authCode = authCode;
+  constructor(config) {
+    this._baseUrl = config.baseUrl;//https://mesto.nomoreparties.co/v1/cohort-54/
+    this._headers = config.headers;
   }
 
   _handleResponse(res) {
@@ -10,33 +11,28 @@ export default class Api {
     throw new Error('ошибка');
   }
 
-  getUser() {
-    return fetch('https://nomoreparties.co/v1/cohort-54/users/me', {
-      headers: {
-        "content-type": "application/json",
-        authorization: this._authCode,
-      },
+  getData() {
+    return Promise.all([this.getUserData(), this.getInitialCards()]);
+  }
+
+  getUserData() {
+    return fetch(`${this._baseUrl}users/me`, {
+      headers: this._headers
     })
       .then(this._handleResponse)
   }
 
   getInitialCards() {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
-      headers: {
-        "content-type": "application/json",
-        authorization: this._authCode,
-      },
+    return fetch(`${this._baseUrl}cards`, {
+      headers: this._headers
     })
       .then(this._handleResponse)
   }
 
   editProfile(infoData) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-54/users/me', {
+    return fetch(`${this._baseUrl}users/me`, {
       method: 'PATCH',
-      headers: {
-        authorization: this._authCode,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify(infoData)
     })
       .then(this._handleResponse)
@@ -44,57 +40,42 @@ export default class Api {
   }
 
   addNewCard(cardsData) {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
+    return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
-      headers: {
-        "content-type": "application/json",
-        authorization: this._authCode,
-      },
+      headers: this._headers,
       body: JSON.stringify(cardsData)
     })
       .then(this._handleResponse)
   }
 
   deleteCard(id) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}`, {
+    return fetch(`${this._baseUrl}cards/${id}`, {
       method: 'DELETE',
-      headers: {
-        authorization: this._authCode,
-      },
+      headers: this._headers,
     })
       .then(this._handleResponse)
   }
 
   addLike(id) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}/likes`, {
+    return fetch(`${this._baseUrl}cards/${id}/likes`, {
       method: 'PUT',
-      headers: {
-        authorization: this._authCode,
-        'Content-Type': 'application/json',
-      },
+      headers: this._headers,
     })
       .then(this._handleResponse)
   }
 
   deleteLike(id) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}/likes`, {
+    return fetch(`${this._baseUrl}cards/${id}/likes`, {
       method: 'DELETE',
-      headers: {
-        authorization: this._authCode,
-        'Content-Type': 'application/json',
-      },
+      headers: this._headers,
     })
       .then(this._handleResponse)
   }
 
   updateAvatar(avatar) {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-54/users/me/avatar", {
+    return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        authorization: this._authCode,
-        'Content-Type': 'application/json',
-      },
-
+      headers: this._headers,
       body: JSON.stringify({
         avatar: avatar
       })

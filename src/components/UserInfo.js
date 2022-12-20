@@ -15,8 +15,8 @@ export default class UserInfo {
   // Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии.
   getUserInfo() {
     return {
-      name: this._nameSelector.textContent,
-      job: this._jobSelector.textContent
+      inputName: this._nameSelector.textContent,
+      inputJob: this._jobSelector.textContent
     }
   }
 
