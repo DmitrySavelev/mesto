@@ -20,7 +20,7 @@ import {
 } from "../utils/constants.js";
 
 let userId;
-let api = new Api(configApi);
+const api = new Api(configApi);
 
 function createCard(cardData) {
   const card = new Card(
