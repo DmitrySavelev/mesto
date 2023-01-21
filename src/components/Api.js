@@ -11,7 +11,7 @@ export default class Api {
     throw new Error('ошибка');
   }
 
-  getData() {
+  getData() { 
     return Promise.all([this.getUserData(), this.getInitialCards()]);
   }
 

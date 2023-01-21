@@ -96,6 +96,7 @@ const handleDeleteCard = (formValue) => {
     .then((data) => {
       console.log(data);
       const elem = document.getElementById(formValue);
+      console.log(elem);
       elem.remove();
       popupDelete.close();
     })
